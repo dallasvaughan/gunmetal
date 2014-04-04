@@ -5,6 +5,7 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.type.ArrayType;
 import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.IntersectionType;
 import javax.lang.model.type.PrimitiveType;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,6 +46,11 @@ public class ImplementationVisitor extends AbstractTypeVisitor<ImplementationVis
             }
         }
         return report;
+    }
+
+    @Override
+    public Report visitIntersection(IntersectionType t, Element element) {
+        return null;
     }
 
     public static class Report {

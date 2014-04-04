@@ -2,6 +2,7 @@ package com.github.overengineer.gunmetal;
 
 import com.github.overengineer.gunmetal.dynamic.DynamicComponentFactory;
 import com.github.overengineer.gunmetal.key.Dependency;
+import com.github.overengineer.gunmetal.key.Qualifier;
 import com.github.overengineer.gunmetal.key.Smithy;
 import com.github.overengineer.gunmetal.key.TypeKey;
 import com.github.overengineer.gunmetal.metadata.MetadataAdapter;
@@ -12,22 +13,12 @@ import com.github.overengineer.gunmetal.scope.Scope;
 import com.github.overengineer.gunmetal.scope.Scopes;
 import com.github.overengineer.gunmetal.util.Order;
 import com.github.overengineer.gunmetal.util.TypeRef;
-import com.github.overengineer.gunmetal.key.Qualifier;
 
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author rees.byars
@@ -190,6 +181,16 @@ public class DefaultContainer implements Container, InternalProvider {
     public <T> Container add(Class<T> componentType, Class<? extends T> implementationType) {
         add(Smithy.forge(componentType, metadataAdapter.getQualifier(implementationType, implementationType.getAnnotations())), implementationType);
         return this;
+    }
+
+    @Override
+    public <T> Container addLambda(Class<T> componentType, Object method, Class<? super T> lambda) {
+        return null;
+    }
+
+    @Override
+    public <T> Container addLambda(Class<? extends T> testServiceClass, Object p1, T stringHandler) {
+        return null;
     }
 
     @Override

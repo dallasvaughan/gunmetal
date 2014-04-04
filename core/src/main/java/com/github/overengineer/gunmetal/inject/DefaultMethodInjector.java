@@ -12,7 +12,7 @@ public class DefaultMethodInjector<T> implements MethodInjector<T> {
 
     private static final long serialVersionUID = -1920186851757750774L;
     private final MethodProxy methodProxy;
-    private final ParameterBuilder parameterBuilder;
+    private final ParameterBuilder<T> parameterBuilder;
 
     DefaultMethodInjector(MethodProxy methodProxy, ParameterBuilder<T> parameterBuilder) {
         this.methodProxy = methodProxy;

@@ -23,16 +23,59 @@
         <dependency>
             <groupId>com.google.testing.compile</groupId>
             <artifactId>compile-testing</artifactId>
-            <version>0.2</version>
+            <version>0.4</version>
             <scope>test</scope>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>16.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.testing.compile</groupId>
+            <artifactId>compile-testing</artifactId>
+            <version>0.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.testing.compile</groupId>
+            <artifactId>compile-testing</artifactId>
+            <version>0.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.truth0</groupId>
+            <artifactId>truth</artifactId>
+            <version>0.13</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.testing.compile</groupId>
+            <artifactId>compile-testing</artifactId>
+            <version>0.4</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>com.sun</groupId>
             <artifactId>tools</artifactId>
             <version>${java.version}</version>
             <scope>system</scope>
-            <systemPath>${toolsjar}</systemPath>
+            <systemPath>${java.home}/../lib/tools.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.google.testing.compile</groupId>
+            <artifactId>compile-testing</artifactId>
+            <version>0.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.testing.compile</groupId>
+            <artifactId>compile-testing</artifactId>
+            <version>0.4</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -46,6 +89,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
+                    <executable>/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/bin/javac</executable>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <compilerArgument>-proc:none</compilerArgument>
@@ -93,12 +137,19 @@
                 <dependency>
                     <groupId>com.google.testing.compile</groupId>
                     <artifactId>compile-testing</artifactId>
-                    <version>0.3-SNAPSHOT</version>
+                    <version>0.2</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
         </profile>
 
     </profiles>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>http://repo1.maven.org/maven2/</url>
+        </repository>
+    </repositories>
 
 </project>

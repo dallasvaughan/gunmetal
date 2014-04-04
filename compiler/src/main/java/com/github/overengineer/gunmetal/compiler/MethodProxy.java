@@ -3,6 +3,7 @@ package com.github.overengineer.gunmetal.compiler;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.type.ExecutableType;
+import javax.lang.model.type.IntersectionType;
 import javax.lang.model.type.TypeMirror;
 import java.util.List;
 
@@ -38,6 +39,11 @@ public class MethodProxy {
             @Override
             public MethodProxy visitExecutable(ExecutableType executableType, Void v) {
                 return new MethodProxy(executableType);
+            }
+
+            @Override
+            public MethodProxy visitIntersection(IntersectionType t, Void aVoid) {
+                return null;
             }
         }, null);
     }

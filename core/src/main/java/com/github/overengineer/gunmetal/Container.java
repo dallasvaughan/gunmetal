@@ -26,6 +26,11 @@ public interface Container extends Provider, InternalProvider {
 
     <T> Container add(Class<T> componentType, Class<? extends T> implementationType);
 
+    <T> Container addLambda(Class<T> componentType, Object method, Class<? super T> lambda);
+
+//    <T> Container addLambda(Class<T> componentType, Object qualifier, Object lambda);
+    <T> Container addLambda(Class<? extends T> testServiceClass, Object p1, T stringHandler);
+
     <T> Container add(Class<T> componentType, Object qualifier, Class<? extends T> implementationType);
 
     <T> Container add(Dependency<T> dependency, Class<? extends T> implementationType);

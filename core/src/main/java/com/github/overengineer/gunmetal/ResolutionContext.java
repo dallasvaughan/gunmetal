@@ -27,7 +27,7 @@ public interface ResolutionContext {
 
         private static class ResolutionContextImpl implements ResolutionContext {
 
-            private final Map<ComponentStrategy, ComponentStrategyContext> contextMap = new HashMap<ComponentStrategy, ComponentStrategyContext>();
+            private final Map<ComponentStrategy, ComponentStrategyContext> contextMap = new HashMap<>();
 
             @Override
             public <T> ComponentStrategyContext<T> getStrategyContext(ComponentStrategy<T> strategy) {

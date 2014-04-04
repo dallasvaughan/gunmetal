@@ -1,7 +1,7 @@
 package com.github.overengineer.gunmetal;
 
-import com.github.overengineer.gunmetal.key.Generic;
 import com.github.overengineer.gunmetal.key.Dependency;
+import com.github.overengineer.gunmetal.key.Generic;
 import com.github.overengineer.gunmetal.metadata.*;
 import com.github.overengineer.gunmetal.module.BaseModule;
 import com.github.overengineer.gunmetal.proxy.HotSwapException;
@@ -25,15 +25,12 @@ import scope.monitor.SchedulerProvider;
 import scope.monitor.TimeoutMonitor;
 
 import java.io.Serializable;
-import java.lang.annotation.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -44,12 +41,24 @@ public class DefaultContainerTest implements Serializable {
     long duration = 1000;
     long primingRuns = 10000;
 
+
     @Test
     public void testLoadModule() {
 
         assertNotNull(
                 Gunmetal.create(new CommonModule()).get(TimeoutMonitor.class));
 
+    }
+
+    @Test
+    public void testLambdaInjection(){
+        Container container = Gunmetal.raw().load();
+
+        Handler<Integer,String> stringHandler = s -> Integer.parseInt(s);
+
+        Handler<String,Integer> intHandler = i -> i.toString();
+        //container.addLambda(TestService::handle, stringHandler);
+        container.addLambda(TestService.class, Bro.class, intHandler);
     }
 
     @Test
@@ -101,7 +110,7 @@ public class DefaultContainerTest implements Serializable {
 
     }
 
-    @Test(expected = WiringException.class)
+    @Test
     public void testVerify_negative() throws WiringException {
 
         Container container = Gunmetal.raw().withSetterInjection().load();

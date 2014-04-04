@@ -54,7 +54,7 @@
     </modules>
 
     <properties>
-        <java.version>1.7</java.version>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <slf4j.version>1.7.0</slf4j.version>
     </properties>
@@ -148,7 +148,8 @@
                     <configuration>
                         <source>${java.version}</source>
                         <target>${java.version}</target>
-                        <compilerArgument>-Xlint:all</compilerArgument>
+                        <executable>/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/bin/javac</executable>
+                        <!--<compilerArgument>-Xlint:all</compilerArgument>-->
                         <showWarnings>true</showWarnings>
                         <showDeprecation>true</showDeprecation>
                         <fork>true</fork>

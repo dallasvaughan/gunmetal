@@ -43,13 +43,14 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * An implementation of the {@link TimeoutMonitor} that makes use of a {@link java.util.concurrent.ScheduledExecutorService}.
- * <p/>
+ * <p>
  * Cache's tasks and will add them to a new ScheduledExecutorService after serialization in order
  * to continue monitoring in cases such as cluster replication.
- * <p/>
+ * </p>
+ * <p>
  * Of note:  this class depends on being given a new scheduler after serialization, is does not
  * create its own schedulers.  Likewise, it must be given an instance when it is first created as well.
- *
+ * </p>
  * @author rees.byars
  */
 @Prototype

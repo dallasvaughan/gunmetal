@@ -14,17 +14,17 @@ import java.lang.annotation.Target;
  *  <pre>
  *  {@code
  *
- *  @ApplicationModule(
+ *  {@literal @}ApplicationModule(
  *      layers = {
  *          UI.class, BL.class
  *      }
  *  )
  *
- *  @Module(layer = UI.class)
+ *  {@literal @}Module(layer = UI.class)
  *
- *  @BL //qualifier
- *  @Layer.Uses(DAL.class)
- *  @Layer.UsedBy(UI.class)
+ *  {@literal @}BL //qualifier
+ *  {@literal @}Layer.Uses(DAL.class)
+ *  {@literal @}Layer.UsedBy(UI.class)
  *  public class BL implements Layer { }
  *
  *
