@@ -16,18 +16,22 @@
 
 package io.gunmetal.internal;
 
-import com.github.overengineer.gunmetal.testmocks.A;
 import io.gunmetal.ApplicationContainer;
 import io.gunmetal.ApplicationModule;
 import io.gunmetal.Gunmetal;
+import io.gunmetal.Inject;
 import io.gunmetal.Lazy;
 import io.gunmetal.Module;
 import io.gunmetal.Prototype;
 import io.gunmetal.Provider;
+import io.gunmetal.testmocks.A;
+import io.gunmetal.testmocks.F;
+import io.gunmetal.testmocks.NewGunmetalBenchMarkModule2;
 import org.junit.Test;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
 
 /**
  * @author rees.byars
@@ -38,20 +42,31 @@ public class ApplicationBuilderImplTest {
     @io.gunmetal.Qualifier
     public @interface Main {}
 
-
     @Module(notAccessibleFrom = TestModule.BlackList.class)
     static class TestModule {
 
         @io.gunmetal.BlackList.Modules(M.class)
-        class BlackList implements io.gunmetal.BlackList { }
+        static class BlackList implements io.gunmetal.BlackList {
+
+            @Inject
+            TestModule testModule;
+
+
+        }
+
+        static TestModule tm(A a, ArrayList<Integer> integers) {
+            return new TestModule();
+        }
 
         @Main static ApplicationBuilderImplTest test(ApplicationBuilderImplTest test) {
             return new ApplicationBuilderImplTest();
         }
 
-        static Object test2(Provider<ApplicationBuilderImplTest> test) {
+        static Object test2(Provider<ApplicationBuilderImplTest> test, BlackList blackList) {
             System.out.println(test.get());
             System.out.println(test.get());
+
+            System.out.println(blackList);
             return test.get();
         }
 
@@ -90,9 +105,21 @@ public class ApplicationBuilderImplTest {
         A a = app.get(Dep2.class);
 
         assert a != app.get(Dep2.class);
+
+        class InjectTest {
+            @Inject
+            F f;
+        }
+
+        InjectTest injectTest = new InjectTest();
+
+        app.inject(injectTest);
+
+        assert injectTest.f != null;
+
     }
 
-    @Test(expected = IllegalAccessError.class)
+    @Test(expected = DependencyException.class)
     public void testBlackList() {
 
         @ApplicationModule(modules = { TestModule.class, M.class })
