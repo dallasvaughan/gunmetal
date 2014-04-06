@@ -16,8 +16,14 @@
 
 package io.gunmetal.internal;
 
-import com.github.overengineer.gunmetal.TestService;
-import io.gunmetal.*;
+import io.gunmetal.ApplicationContainer;
+import io.gunmetal.ApplicationModule;
+import io.gunmetal.Gunmetal;
+import io.gunmetal.Inject;
+import io.gunmetal.Lazy;
+import io.gunmetal.Module;
+import io.gunmetal.Prototype;
+import io.gunmetal.Provider;
 import io.gunmetal.testmocks.A;
 import io.gunmetal.testmocks.F;
 import io.gunmetal.testmocks.NewGunmetalBenchMarkModule2;
@@ -95,10 +101,6 @@ public class ApplicationBuilderImplTest {
         class Dep2 implements io.gunmetal.Dependency<A> { }
 
         app = Gunmetal.create(NewGunmetalBenchMarkModule2.class);
-
-        ApplicationContainer container = Gunmetal.create(TestService.class);
-
-
 
         A a = app.get(Dep2.class);
 
