@@ -130,11 +130,9 @@ public class ApplicationBuilderImpl implements ApplicationBuilder {
                     config.qualifierResolver(),
                     config.constructorResolver(),
                     config.classWalker(),
-                    new Linkers() {
-                        @Override public void add(Linker linker, LinkingPhase phase) {
-                            linker.link(internalProvider, ResolutionContext.Factory.create());
-                        }
-                    });
+                    (linker, phase) -> linker.link(internalProvider, ResolutionContext.Factory.create())
+
+            );
 
             @Override public <T> ApplicationContainer inject(T injectionTarget) {
 
